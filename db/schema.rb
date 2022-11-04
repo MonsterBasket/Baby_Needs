@@ -13,8 +13,8 @@
 ActiveRecord::Schema[7.0].define(version: 2022_11_02_054734) do
   create_table "comments", force: :cascade do |t|
     t.string "content", null: false
-    t.integer "commented_on_id"
-    t.string "commented_on_type"
+    t.integer "commented_on_id", null: false
+    t.string "commented_on_type", null: false
     t.integer "user_id", null: false
     t.integer "rating"
     t.datetime "created_at", null: false
@@ -23,9 +23,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_02_054734) do
   end
 
   create_table "likes", force: :cascade do |t|
-    t.integer "liked_id"
-    t.string "liked_type"
-    t.string "category"
+    t.integer "liked_id", null: false
+    t.string "liked_type", null: false
+    t.string "category", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -35,7 +35,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_02_054734) do
   create_table "locations", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "lost_item_id", null: false
-    t.string "name"
+    t.string "name", null: false
     t.string "description"
     t.integer "rating"
     t.datetime "created_at", null: false
@@ -46,7 +46,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_02_054734) do
 
   create_table "lost_items", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.string "name"
+    t.string "name", null: false
     t.string "description"
     t.integer "rating"
     t.datetime "created_at", null: false
@@ -56,7 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_02_054734) do
 
   create_table "problems", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.string "title"
+    t.string "title", null: false
     t.string "description"
     t.integer "rating"
     t.datetime "created_at", null: false
@@ -67,7 +67,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_02_054734) do
   create_table "solutions", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "problem_id", null: false
-    t.string "description"
+    t.string "description", null: false
     t.integer "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -77,7 +77,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_02_054734) do
 
   create_table "users", force: :cascade do |t|
     t.string "user_name", null: false
-    t.string "name"
+    t.string "display_name"
     t.string "country"
     t.string "email", null: false
     t.string "password", null: false

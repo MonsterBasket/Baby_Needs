@@ -3,7 +3,7 @@ class CreateSolutions < ActiveRecord::Migration[7.0]
     create_table :solutions do |t|
       t.references :user, null: false, foreign_key: true
       t.references :problem, null: false, foreign_key: true
-      t.string :description
+      t.string :description, null: false
       t.integer :rating
 
       t.timestamps

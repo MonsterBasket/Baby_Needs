@@ -2,13 +2,8 @@ require 'rails_helper'
 require 'pry'
 
 RSpec.describe Problem, type: :model do
-  let(:user) { User.create(user_name: "New User", name: "Freddy Mercury", country: "England", email: "yep", password: "nope") }
-
-  let(:problem) { Problem.create(
-    user: user,
-    title: "This is a problem",
-    description: "Description of the problem")
-  }
+  let(:user) { User.create(user_name: "New User", display_name: "Freddy Mercury", country: "England", email: "yep", password: "nope") }
+  let(:problem) { Problem.create(user: user, title: "This is a problem", description: "Description of the problem") }
 
   it "is invalid without a title" do
     problem.title = nil
@@ -29,5 +24,11 @@ RSpec.describe Problem, type: :model do
     expect(problem.valid?).to be true
   end
 
+  describe 'validations:' do
+    let(:invalid) { Problem.new }
 
+    it 'validates title' do 
+      expect(invalid).to have(1).error_on(:title)
+    end
+  end
 end

@@ -3,7 +3,7 @@ class CreateLocations < ActiveRecord::Migration[7.0]
     create_table :locations do |t|
       t.references :user, null: false, foreign_key: true
       t.references :lost_item, null: false, foreign_key: true
-      t.string :name
+      t.string :name, null: false
       t.string :description
       t.integer :rating
 

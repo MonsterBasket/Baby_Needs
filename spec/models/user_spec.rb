@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'pry'
 
 RSpec.describe User, type: :model do
-  let(:user) { User.create(user_name: "New User", name: "Freddy Mercury", country: "England", email: "yep", password: "nope") }
+  let(:user) { User.create(user_name: "New User", display_name: "Freddy Mercury", country: "England", email: "yep", password: "nope") }
 
   it "is invalid without a user name" do
     user.user_name = nil
@@ -10,7 +10,7 @@ RSpec.describe User, type: :model do
   end
 
   it "is invalid without a name" do
-    user.name = nil
+    user.display_name = nil
     expect(user.valid?).to be false
   end
 
@@ -29,22 +29,22 @@ RSpec.describe User, type: :model do
   end
 
   # -----------------------------------------------
-  describe 'validations: ' do 
+  describe 'validations:' do 
     let(:invalid) { User.new }
 
-    it 'requires a username' do
+    it 'validates username' do
       expect(invalid).to have(1).error_on(:user_name)
     end
 
-    it 'requires a name' do
-      expect(invalid).to have(1).error_on(:name)
+    it 'validates display name' do
+      expect(invalid).to have(1).error_on(:display_name)
     end
 
-    it 'requires a email' do
+    it 'validates email' do
       expect(invalid).to have(1).error_on(:email)
     end
 
-    it 'requires a password' do
+    it 'validates password' do
       expect(invalid).to have(1).error_on(:password)
     end
   end
@@ -60,7 +60,7 @@ RSpec.describe User, type: :model do
       expect(user.valid?).to be true
     end
 
-    let(:user2) { User.create(user_name: "Second User", name: "Test Man", email: "second@test.com", password: "pass")}
+    let(:user2) { User.create(user_name: "Second User", display_name: "Test Man", email: "second@test.com", password: "pass")}
     let(:problem2) { Problem.create(user: user2, title: "This is another problem", description: "Description of the other problem") }
     let(:lost_item2) { LostItem.create( user: user2, name: "Item someone else lost", description: "description of other item if necessary") }
     let(:solution2) { Solution.create( user: user, problem: problem2, description: "Description of the solution to another problem") }
