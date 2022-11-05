@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'pry'
 
 RSpec.describe Solution, type: :model do
   let(:user) { User.create(user_name: "New User", display_name: "Freddy Mercury", country: "England", email: "yep", password: "nope") }
@@ -30,7 +29,8 @@ RSpec.describe Solution, type: :model do
     let(:invalid) { Solution.new }
 
     it 'validates description' do 
-      expect(invalid).to have(1).error_on(:description)
+      invalid.valid?
+      expect(invalid.errors[:description].size).to eq(1)
     end
   end
 end

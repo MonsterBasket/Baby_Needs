@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'pry'
 
 RSpec.describe User, type: :model do
   let(:user) { User.create(user_name: "New User", display_name: "Freddy Mercury", country: "England", email: "yep", password: "nope") }
@@ -31,21 +30,24 @@ RSpec.describe User, type: :model do
   # -----------------------------------------------
   describe 'validations:' do 
     let(:invalid) { User.new }
-
+    
+    before do
+      invalid.valid?
+    end
     it 'validates username' do
-      expect(invalid).to have(1).error_on(:user_name)
+      expect(invalid.errors[:user_name].size).to eq(1)
     end
 
     it 'validates display name' do
-      expect(invalid).to have(1).error_on(:display_name)
+      expect(invalid.errors[:display_name].size).to eq(1)
     end
 
     it 'validates email' do
-      expect(invalid).to have(1).error_on(:email)
+      expect(invalid.errors[:email].size).to eq(1)
     end
 
     it 'validates password' do
-      expect(invalid).to have(1).error_on(:password)
+      expect(invalid.errors[:password].size).to eq(1)
     end
   end
 
@@ -77,6 +79,13 @@ RSpec.describe User, type: :model do
       let(:comment2) { Comment.create(user: user, commented_on: lost_item, content: "Ugh, I lose this all the time!")}
       let(:comment3) { Comment.create(user: user, commented_on: location, content: "Always the last place you'd think to look!")}
 
+      before do
+        comment.valid?
+        comment1.valid?
+        comment2.valid?
+        comment3.valid?
+      end
+      
       it "user can create comments on their own content" do 
         expect(user.comments.count).to eq(4)
         expect(user.valid?).to be true

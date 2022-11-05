@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'pry'
 
 RSpec.describe Location, type: :model do
   let(:user) { User.create(user_name: "New User", display_name: "Freddy Mercury", country: "England", email: "yep", password: "nope") }
@@ -30,7 +29,8 @@ RSpec.describe Location, type: :model do
     let(:invalid) { Location.new }
 
     it 'validates name' do 
-      expect(invalid).to have(1).error_on(:name)
+      invalid.valid?
+      expect(invalid.errors[:name].size).to eq(1)
     end
   end
 end
