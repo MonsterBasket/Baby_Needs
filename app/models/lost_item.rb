@@ -4,4 +4,7 @@ class LostItem < ApplicationRecord
   has_many :likes, as: :liked
 
   validates_presence_of :user, :name
+
+  attribute :rating, :integer, default: 0
+
 end

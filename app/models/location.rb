@@ -5,4 +5,7 @@ class Location < ApplicationRecord
   has_many :likes, as: :liked
 
   validates_presence_of :user, :lost_item, :name
+
+  attribute :rating, :integer, default: 0
+
 end

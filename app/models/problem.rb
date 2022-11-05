@@ -4,4 +4,10 @@ class Problem < ApplicationRecord
   has_many :likes, as: :liked
 
   validates_presence_of :user, :title, :description
+
+  attribute :rating, :integer, default: 0
+
+  # def initialize
+  #   self.rating = 0
+  # end
 end

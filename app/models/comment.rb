@@ -4,4 +4,7 @@ class Comment < ApplicationRecord
   has_many :likes, as: :liked
 
   validates_presence_of :content
+
+  attribute :rating, :integer, default: 0
+
 end

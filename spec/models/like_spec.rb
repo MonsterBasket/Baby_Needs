@@ -2,11 +2,12 @@ require 'rails_helper'
 
 RSpec.describe Like, type: :model do
   let(:user) { User.create(user_name: "New User", display_name: "Freddy Mercury", country: "England", email: "yep", password: "nope") }
-  let(:problem) { Problem.create(user: user, title: "This is a problem", description: "Description of the problem") }
-  let(:solution) { Solution.create( user: user, problem: problem, description: "Description of the solution") }
-  let(:lost_item) { LostItem.create( user: user, name: "Item you've lost", description: "description of item if necessary") }
-  let(:location) { Location.create( user: user, lost_item: lost_item, name: "Name of where it may be found", description: "description of location")}
-  let(:comment) { Comment.create( user: user, commented_on: problem, content: "bla bla bla")}
+  let(:user2) { User.create(user_name: "Other guy", display_name: "Freddy Mercury", country: "England", email: "yep", password: "nope") }
+  let(:problem) { Problem.create(user: user2, title: "This is a problem", description: "Description of the problem") }
+  let(:solution) { Solution.create( user: user2, problem: problem, description: "Description of the solution") }
+  let(:lost_item) { LostItem.create( user: user2, name: "Item you've lost", description: "description of item if necessary") }
+  let(:location) { Location.create( user: user2, lost_item: lost_item, name: "Name of where it may be found", description: "description of location")}
+  let(:comment) { Comment.create( user: user2, commented_on: problem, content: "bla bla bla")}
 
   let(:like) { Like.create(user: user, liked: problem, category: "like") }
   let(:like1) { Like.create(user: user, liked: solution, category: "love") }

@@ -5,4 +5,7 @@ class Solution < ApplicationRecord
   has_many :likes, as: :liked
 
   validates_presence_of :user, :problem, :description
+
+  attribute :rating, :integer, default: 0
+
 end

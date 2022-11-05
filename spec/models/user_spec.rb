@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'pry'
 
 RSpec.describe User, type: :model do
   let(:user) { User.create(user_name: "New User", display_name: "Freddy Mercury", country: "England", email: "yep", password: "nope") }
@@ -85,7 +86,7 @@ RSpec.describe User, type: :model do
         comment2.valid?
         comment3.valid?
       end
-      
+
       it "user can create comments on their own content" do 
         expect(user.comments.count).to eq(4)
         expect(user.valid?).to be true
@@ -128,7 +129,7 @@ RSpec.describe User, type: :model do
 
         it "user has reputation to reflect other users likes on their content" do
           like4 = Like.create(user: user2, liked: problem, category: "like")
-          expect(user.reputation).to eq(1)
+          expect(user.reputation).to eq(10)
         end
       end
     end
