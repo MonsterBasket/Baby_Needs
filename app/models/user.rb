@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :comment_likes, through: :comments, source: :likes
 
   validates_presence_of :user_name, :display_name, :email, :password
+  validates_uniqueness_of :user_name, :display_name, :email
 
   attribute :reputation, :integer, default: 0
 

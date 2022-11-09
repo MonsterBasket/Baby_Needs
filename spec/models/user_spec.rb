@@ -3,6 +3,8 @@ require 'pry'
 
 RSpec.describe User, type: :model do
   let(:user) { User.create(user_name: "New User", display_name: "Freddy Mercury", country: "England", email: "yep", password: "nope") }
+  let(:user2) { User.create(user_name: "New User", display_name: "Freddy Mercury", country: "England", email: "yep", password: "nope") }
+
 
   it "is invalid without a user name" do
     user.user_name = nil
@@ -22,6 +24,10 @@ RSpec.describe User, type: :model do
   it "is invalid without a password" do
     user.password = nil
     expect(user.valid?).to be false
+  end
+
+  it "cannot have the same user_name, display_name or email as another user" do
+    expect(user2.valid?.to be false)
   end
 
   it "is valid with all attributes and no 'has_many' attributions" do

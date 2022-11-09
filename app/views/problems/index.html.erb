@@ -1,0 +1,14 @@
+<p style="color: green"><%= alert %></p>
+
+<h1>All Problems</h1>
+
+<div id="articles">
+  <% @problems.each do |problem| %>
+    <%= render problem %>
+    <p>
+      <%= link_to problem.name, problem %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New problem", new_problem_path %>
