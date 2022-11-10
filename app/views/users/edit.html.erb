@@ -1,0 +1,28 @@
+<h1>Edit Profile</h1>
+
+<%= form_with model: @user do |f| %>
+
+<div class="profile_container">
+  <div class="profile_left">User Name:</div>
+  <div class="profile_right"><%= @user.user_name %></div>
+
+  <div class="profile_left"><%= f.label :display_name %>:</div>
+  <div class="profile_right"><%= f.text_field :display_name %></div>
+
+  <div class="profile_left"><%= f.label :country %>:</div>
+  <div class="profile_right"><%= f.text_field :country %></div>
+
+  <div class="profile_left"><%= f.label :email %>:</div>
+  <div class="profile_right"><%= f.text_field :email %></div>
+
+  <div class="profile_left"><%= f.label :password %>:</div>
+  <div class="profile_right"><%= f.password_field :password %></div>
+
+  <div class="profile_left"><%= f.label :confirm_password %>:</div>
+  <div class="profile_right"><%= f.password_field :confirm_password %></div>
+
+</div>
+<%= f.submit "Save" %>
+<% end %>
+
+

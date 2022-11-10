@@ -1,4 +1,17 @@
 <%= render @user %>
-<h1><% @user.to_s %></h1>
+<h1>My Profile</h1>
 
-<%= @user.user_name %>
+<div class="profile_container">
+<div class="profile_left">User Name:</div>
+<div class="profile_right"><%= @user.user_name %></div>
+<div class="profile_left">Display Name:</div>
+<div class="profile_right"><%= @user.display_name %></div>
+<div class="profile_left">Country:</div>
+<div class="profile_right"><%= @user.country %></div>
+<div class="profile_left">Email:</div>
+<div class="profile_right"><%= @user.email %></div>
+
+</div>
+
+<%= link_to "Edit Profile", edit_user_path(@user) %>
+

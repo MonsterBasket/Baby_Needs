@@ -3,7 +3,7 @@ class Problem < ApplicationRecord
   has_many :comments, as: :commented_on
   has_many :likes, as: :liked
 
-  validates_presence_of :user, :title, :description
+  validates_presence_of :title, :description
 
   attribute :rating, :integer, default: 0
 

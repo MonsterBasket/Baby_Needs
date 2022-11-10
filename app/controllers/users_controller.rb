@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  # before_action :set_user, only: %i[new show edit]
+  before_action :set_user, only: %i[show edit update]
+
   def new
     @user = User.new
   end
@@ -22,14 +23,28 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+  end
+
+  def update
+
+    respond_to do |format|
+      @user.display_name = user_params[:display_name]
+      @user.country = user_params[:country]
+      @user.email = user_params[:email]
+      @user.password = user_params[:password]
+      @user.save
+
+      format.all {redirect_to user_url(@user), alert: "Details saved."}
+    end
   end
 
   def edit; end
 
-  # def set_user
-  #  
-  # end
+  private
+
+  def set_user
+    @user = User.find(params[:id])
+  end
 
   def user_params
     params.fetch(:user, {})
