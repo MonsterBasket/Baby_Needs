@@ -27,7 +27,7 @@ RSpec.describe User, type: :model do
   end
 
   it "cannot have the same user_name, display_name or email as another user" do
-    expect(user2.valid?.to be false)
+    expect(user2.valid?).to be false
   end
 
   it "is valid with all attributes and no 'has_many' attributions" do

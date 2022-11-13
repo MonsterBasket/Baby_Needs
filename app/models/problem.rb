@@ -7,7 +7,14 @@ class Problem < ApplicationRecord
 
   attribute :rating, :integer, default: 0
 
-  # def initialize
-  #   self.rating = 0
-  # end
+  #not sure if this is really required with my validation in like.rb
+  def liked?(user)
+    !!self.likes.find{ |like| like.user_id == user[:id] && like.category == "like" } #should be user.id, not user[:id]
+  end
+
+  def disliked?(user)
+    !!self.likes.find{ |like| like.user_id == user[:id] && like.category == "dislike" } #should be user.id, not user[:id]
+  end
+
+
 end

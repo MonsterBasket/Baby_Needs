@@ -1,1 +1,41 @@
-<%= @problem %>
+<%= render @problem %>
+
+<h1><%= @problem.title %></h1>
+<div class="problem-container">
+  <aside class="votes">
+    <div>
+      <%# if user_signed_in? %>
+        <% if @problem.liked?({ fake: "user", id: 2 }) %>
+          <%= button_to "▲", problem_like_path(@problem), method: "put", class:"red" %>
+        <% else %>
+          <%= button_to "▲", problem_like_path(@problem), method: "put" %>
+        <% end %>
+      <%# end %>
+    </div>
+    <div><%= @problem.rating %></div>
+      <%# if user_signed_in? %>
+        <% if @problem.disliked?({ fake: "user", id: 2 }) %>
+          <%= button_to "▼", problem_dislike_path(@problem), method: "put", class:"red" %>
+        <% else %>
+          <%= button_to "▼", problem_dislike_path(@problem), method: "put" %>
+        <% end %>
+      <%# end %>
+    </div>
+  </aside>
+  <main>
+    <%= @problem.description %>
+  </main>
+</div>
+
+<section id="comments">
+  <%= form_with model: @comment do |f| %>
+    Comment: <% f.text_field :content %>
+    <%= f.hidden_field :parent, value: @problem %>
+    <%= f.submit %>
+  <% end %>
+  <% @problem.comments.each do |comment| %>
+    <p>
+      <%= comment.content %>
+    </p>
+  <% end %>
+</section>
