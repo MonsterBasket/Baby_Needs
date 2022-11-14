@@ -38,6 +38,38 @@ div .profile_right{
   border: none;
   border-radius: 10px;
 }
+.problem-container{
+  border: solid 1px grey;
+  background: darkgrey;
+  display: flex;
+  margin-bottom: 10px;
+}
+.votes{
+  background: lightcyan;
+  text-align: center;
+  padding: 5px;
+}
 .red{
   color: red;
+}
+.problem-container article{
+  background: lightblue;
+  padding: 5px 10px;
+  width: 100%;
+}
+details{
+  width: 200px;
+  height: 100px;
+}
+details > summary{
+  padding: 2px 6px;
+  width: 80px;
+  background-color: #ddd;
+  border: none;
+  box-shadow: 3px 3px 4px black;
+  cursor: pointer;
+  list-style: none;
+}
+details > p {
+  border: solid 1px black;
 }

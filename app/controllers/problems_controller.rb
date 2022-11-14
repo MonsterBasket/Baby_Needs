@@ -9,10 +9,6 @@ class ProblemsController < ApplicationController
     @problem = Problem.new
   end
 
-  def comment
-
-  end
-
   def like(category = "like")
     this_problem = Problem.all.find(params[:id])
     this_like = Like.all.find{ |like| like.user_id == 2 && like.liked == this_problem }

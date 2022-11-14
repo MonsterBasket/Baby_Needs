@@ -13,6 +13,7 @@
       <%# end %>
     </div>
     <div><%= @problem.rating %></div>
+    <div>
       <%# if user_signed_in? %>
         <% if @problem.disliked?({ fake: "user", id: 2 }) %>
           <%= button_to "▼", problem_dislike_path(@problem), method: "put", class:"red" %>
@@ -22,20 +23,44 @@
       <%# end %>
     </div>
   </aside>
-  <main>
+  <article>
     <%= @problem.description %>
-  </main>
+  </article>
 </div>
 
-<section id="comments">
-  <%= form_with model: @comment do |f| %>
-    Comment: <% f.text_field :content %>
-    <%= f.hidden_field :parent, value: @problem %>
-    <%= f.submit %>
-  <% end %>
-  <% @problem.comments.each do |comment| %>
+<section class="comments-container">
+  <details>
+    <summary>Comment</summary>
     <p>
-      <%= comment.content %>
+      <%= form_with scope: :comment, url: new_comment_path do |f| %>
+        <%= f.text_area :content %><br>
+        <%= f.hidden_field :parent_id, value: @problem.id %>
+        <%= f.hidden_field :parent_type, value: @problem.class %>
+        <%= f.submit %>
+      <% end %>
+    </p>
+  </details>
+  <% @problem.comments.all.each do |comment| %>
+    <p>
+      <%= comment.user.display_name %><br>
+      <%= comment.content %><br>
+      
+      <%# if user_signed_in? %>
+        <% if comment.liked?({ fake: "user", id: 2 }) %>
+          <%= button_to "▲", comment_like_path(comment), method: "put", class:"red" %>
+        <% else %>
+          <%= button_to "▲", comment_like_path(comment), method: "put" %>
+        <% end %>
+      <%# end %>
+    <%= comment.rating %>
+      <%# if user_signed_in? %>
+        <% if comment.disliked?({ fake: "user", id: 2 }) %>
+          <%= button_to "▼", comment_dislike_path(comment), method: "put", class:"red" %>
+        <% else %>
+          <%= button_to "▼", comment_dislike_path(comment), method: "put" %>
+        <% end %>
+      <%# end %>
+
     </p>
   <% end %>
 </section>

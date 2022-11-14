@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   put 'problem/:id/like', to: 'problems#like', as: 'problem_like'
   put 'problem/:id/dislike', to: 'problems#dislike', as: 'problem_dislike'
-  put 'problem/:id/comment', to: 'problems#comment', as: 'problem_comment'
+  post 'comments/new', to: 'comments#create', as: 'new_comment'
+  put 'comment/:id/like', to: 'comments#like', as: 'comment_like'
+  put 'comment/:id/dislike', to: 'comments#dislike', as: 'comment_dislike'
   #put 'solution/:id/like', to: 'solutions#like', as: 'like'
   #put 'comment/:id/like', to: 'comments#like', as: 'like'
 end
