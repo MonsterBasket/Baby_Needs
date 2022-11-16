@@ -1,0 +1,24 @@
+<%= form_with scope: :comment do |f| %>
+  <% parent.comments.all.each do |comment| %>
+    <div class="comments">
+      <span class="comment-name"><%= comment.user.display_name %></span><br>
+      <span class="comment-content"><%= comment.content %></span><br>
+        
+      <% if logged_in? %>
+        <%= render partial: 'shared/like', locals: { parent: comment, page: page, category: "like" } %>
+      <% end %>
+      <span class=<%= "red" if !!current_user && comment.liked?(current_user) || comment.disliked?(current_user) %>>
+        <%= comment.rating %>
+      </span>
+      <% if logged_in? %>
+        <%= render partial: 'shared/like', locals: { parent: comment, page: page, category: "dislike" } %>
+      <% end %>
+      <%= render partial: 'shared/new_comment', locals: { parent: comment, page: page, text: "Reply" } %>    
+    </div>
+    <% if comment.comments.count > 0 %>
+      <div class="indented-comment">
+        <%= render partial: 'shared/show_comments', locals: { parent: comment, page: page } %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

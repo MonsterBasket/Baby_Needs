@@ -9,21 +9,6 @@ class ProblemsController < ApplicationController
     @problem = Problem.new
   end
 
-  def like(category = "like")
-    this_problem = Problem.all.find(params[:id])
-    this_like = Like.all.find{ |like| like.user_id == current_user.id && like.liked == this_problem }
-    create_like = !this_like || this_like.category != category ? true : false
-    this_like.destroy if this_like
-    if create_like
-      Like.create(user_id: 2, liked: this_problem, category: category)
-    end
-    redirect_to problem_path(this_problem)
-  end
-
-  def dislike
-    like "dislike"
-  end
-
   def create
     @problem = Problem.new
     @problem.title = problem_params[:title]

@@ -1,0 +1,13 @@
+<%= form_with scope: :comment, class: "new-comment", url: new_comment_path do |f| %>
+  <details>
+    <summary class=<%= "comment-summary" if parent.class == Comment %>><%= text %></summary> 
+    <div>
+        <%= f.text_area :content %><br>
+        <%= f.hidden_field :parent_id, value: parent.id %>
+        <%= f.hidden_field :parent_type, value: parent.class %>
+        <%= f.hidden_field :page_id, value: page.id %>
+        <%= f.hidden_field :page_type, value: page.class %>
+        <%= f.submit "Save" %>
+    </div>
+  </details>
+<% end %>

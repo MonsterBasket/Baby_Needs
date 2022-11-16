@@ -7,7 +7,7 @@ class Like < ApplicationRecord
   before_save :add_rating
   before_destroy :remove_rating
   validate :same_user
-  validates :user_id, uniqueness: {scope: :liked_id}
+  validates :user_id, uniqueness: {scope: [:liked_id, :liked_type] }
 
   private
 

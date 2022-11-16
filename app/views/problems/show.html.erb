@@ -5,58 +5,27 @@
   <aside class="votes">
     <div>
       <% if logged_in? %>
-          <%#= button_to "▲", problem_like_path(@problem), method: "put", class:"#{"red" if @problem.liked?({ fake: "user", id: 2 })}" %>
-        <%= render partial: 'likes/like', locals: { parent: @problem, page: @problem, category: "like" } %>
+        <%= render partial: 'shared/like', locals: { parent: @problem, page: @problem, category: "like" } %>
       <% end %>
     </div>
-    <div class=<%= "red" if !!current_user && @problem.liked?(current_user) || @problem.disliked?(current_user) %>><%= @problem.rating %></div>
+    <div class=<%= "red" if !!current_user && @problem.liked?(current_user) || @problem.disliked?(current_user) %>>
+      <%= @problem.rating %>
+    </div>
     <div>
       <% if logged_in? %>
-        <%#= button_to "▼", problem_dislike_path(@problem), method: "put", class:"#{"red" if @problem.disliked?(current_user)}" %>
-        <%= render partial: 'likes/like', locals: { parent: @problem, page: @problem, category: "dislike" } %>
-      <%# end %>
+        <%= render partial: 'shared/like', locals: { parent: @problem, page: @problem, category: "dislike" } %>
+      <% end %> <%# I don't know why, but the page doesn't work with this end in place, even though it should definitely be there %>
     </div>
   </aside>
   <article>
     <%= @problem.description %>
   </article>
 </div>
+  <%= render partial: 'shared/new_comment', locals: { parent: @problem, page: @problem, text: "Comment" } %>
 
-<section class="comments-container">
-  <details>
-    <summary>Comment</summary>
-    <p>
-      <%= form_with scope: :comment, url: new_comment_path do |f| %>
-        <%= f.text_area :content %><br>
-        <%= f.hidden_field :parent_id, value: @problem.id %>
-        <%= f.hidden_field :parent_type, value: @problem.class %>
-        <%= f.submit %>
-      <% end %>
-    </p>
-  </details>
-  <% @problem.comments.all.each do |comment| %>
-    <p>
-      <%= comment.user.display_name %><br>
-      <%= comment.content %><br>
-      
-      <% if logged_in? %>
-        <% if comment.liked?(current_user) %>
-          <%#= button_to "▲", comment_like_path(comment), method: "put", class:"red" %>
-          <%= render partial: 'likes/like', locals: { parent: comment, page: @problem, category: "like" } %>
-        <% else %>
-          <%#= button_to "▲", comment_like_path(comment), method: "put" %>
-          <%= render partial: 'likes/like', locals: { parent: comment, page: @problem, category: "dislike" } %>
-        <% end %>
-      <% end %>
-    <%= comment.rating %>
-      <% if logged_in? %>
-        <% if comment.disliked?(current_user) %>
-          <%= button_to "▼", comment_dislike_path(comment), method: "put", class:"red" %>
-        <% else %>
-          <%= button_to "▼", comment_dislike_path(comment), method: "put" %>
-        <% end %>
-      <% end %>
-    </p>
-  <% end %>
-</section>
-<% end %>
+<details class="comments-container">
+  <summary data-open="Hide Comments" data-close="Show Comments"></summary>
+  <%= render partial: 'shared/show_comments', locals: { parent: @problem, page: @problem } %>
+</details>
+
+<%= button_to %>

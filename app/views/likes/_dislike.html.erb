@@ -1,9 +1,0 @@
-<%= form_with scope: :like, url: new_like_path do |f| %>
-  <%= f.hidden_field :user_id, value: current_user.id %>
-  <%= f.hidden_field :parent_id, value: parent.id %>
-  <%= f.hidden_field :parent_type, value: parent.class %>
-  <%= f.hidden_field :page_id, value: page.id %>
-  <%= f.hidden_field :page_type, value: page.class %>
-  <%= f.hidden_field :category, value: "dislike" %>
-  <%= f.submit "▼", class:"#{"red" if parent.disliked?(current_user)}" %>
-<% end %>

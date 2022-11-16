@@ -49,6 +49,22 @@ div .profile_right{
   text-align: center;
   padding: 5px;
 }
+.like{
+  display: inline;
+}
+.comment-vote{
+  border: none;
+  background: rgba(0, 0, 0, 0);
+  size: 0.5em;
+  display: inline;
+  cursor: pointer;
+}
+.comment-name{
+  margin-left: 5px;
+  color: rgb(104, 104, 104);
+  size: 0.8em;
+  font-weight: bold;
+}
 .red{
   color: red;
 }
@@ -57,19 +73,44 @@ div .profile_right{
   padding: 5px 10px;
   width: 100%;
 }
+.comments-container[open] summary::after{
+  content: attr(data-open);
+}
+.comments-container:not([open]) summary::after{
+  content: attr(data-close);
+}
+.comments-container > summary{
+  font-size: 0.8em;
+}
+details.comments-container{
+  width: 100%;
+}
 details{
-  width: 200px;
-  height: 100px;
+  width: fit-content;
+  height: auto;
+  margin: 3px;
+}
+
+.comments{
+  margin: 5px;
+  padding: 5px;
+  background: rgb(240, 240, 240);
 }
 details > summary{
   padding: 2px 6px;
-  width: 80px;
+  width: auto;
   background-color: #ddd;
   border: none;
-  box-shadow: 3px 3px 4px black;
   cursor: pointer;
   list-style: none;
+  display: inline;
 }
-details > p {
-  border: solid 1px black;
+details > summary.comment-summary{
+  font-size: 0.8em;
+
+}
+.indented-comment{
+  border-left: solid 2px black;
+  margin-left: 5px;
+  padding-left: 5px;
 }
