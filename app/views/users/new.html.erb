@@ -2,30 +2,26 @@
 
 <%= form_with model: @user do |f| %>
 
-  <div>
-    <%= f.label :username %>
-    <%= f.text_field :username %>
-  </div>
-  <div>
-    <%= f.label :display_name %>
-    <%= f.text_field :display_name %>
-  </div>
-  <div>
-    <%= f.label :country %>
-    <%= f.text_field :country %>
-  </div>
-  <div>
-    <%= f.label :email %>
-    <%= f.text_field :email %>
-  </div>
-  <div>
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-  </div>
-  <div>
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
-  </div>
+<div class="profile_container">
+  <div class="profile_left"><%= f.label :username %></div>
+  <div class="profile_right"><%= f.text_field :username %></div>
+
+  <div class="profile_left"><%= f.label :display_name %>:</div>
+  <div class="profile_right"><%= f.text_field :display_name %></div>
+
+  <div class="profile_left"><%= f.label :country %>:</div>
+  <div class="profile_right"><%= f.text_field :country %></div>
+
+  <div class="profile_left"><%= f.label :email %>:</div>
+  <div class="profile_right"><%= f.text_field :email %></div>
+
+  <div class="profile_left"><%= f.label :password %>:</div>
+  <div class="profile_right"><%= f.password_field :password %></div>
+
+  <div class="profile_left"><%= f.label :confirm_password %>:</div>
+  <div class="profile_right"><%= f.password_field :password_confirmation %></div>
+
+</div>
 
   <%= f.submit "Create Account" %>
 

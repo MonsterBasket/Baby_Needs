@@ -1,9 +1,8 @@
 class LikesController < ApplicationController
 
   def create_or_delete
-    item = Kernel.const_get(like_params[:page_type]).all.find(like_params[:page_id])
+    item = Kernel.const_get(like_params[:parent_type]).all.find(like_params[:parent_id])
     this_like = Like.find{ |like| like.user_id == like_params[:user_id].to_i && like.liked == item }
-    binding.pry
     create_like = !this_like || this_like.category != like_params[:category] ? true : false
     this_like.destroy if this_like
     if create_like

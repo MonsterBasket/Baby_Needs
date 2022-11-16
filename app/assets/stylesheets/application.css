@@ -14,6 +14,7 @@
  *= require_self
  */
 
+ /*----------------- user profile -----------------*/
 .profile_container{
   display: grid;
   grid-template-columns: 140px 1fr;
@@ -38,41 +39,73 @@ div .profile_right{
   border: none;
   border-radius: 10px;
 }
-.problem-container{
-  border: solid 1px grey;
-  background: darkgrey;
+
+/* --------------------- Nav bar -------------------------- */
+nav{
   display: flex;
-  margin-bottom: 10px;
+  justify-content: space-between;
+}
+.button_to{
+  display: inline;
+}
+.navlink{
+  display: inline;
+}
+
+/*-------------------- problems and solutions ----------------*/
+.problem-container, .solution-container{
+  border: solid 1px grey;
+  display: flex;
+  margin-bottom: 0px;
+}
+.solution-container{
+  border: solid 1px lightgray;
+  margin-left: 15px;
+}
+.solution-comments{
+  margin-left: 15px;
 }
 .votes{
   background: lightcyan;
   text-align: center;
   padding: 5px;
 }
+.solution-container .votes{
+  background: rgb(236, 251, 251);
+}
 .like{
   display: inline;
-}
-.comment-vote{
-  border: none;
-  background: rgba(0, 0, 0, 0);
-  size: 0.5em;
-  display: inline;
-  cursor: pointer;
-}
-.comment-name{
-  margin-left: 5px;
-  color: rgb(104, 104, 104);
-  size: 0.8em;
-  font-weight: bold;
 }
 .red{
   color: red;
 }
-.problem-container article{
+.problem-container article, .solution-container article{
+  position: relative;
   background: lightblue;
-  padding: 5px 10px;
+  padding: 5px 10px 15px 10px;
   width: 100%;
 }
+.solution-container article{
+  background-color: rgb(225, 245, 251);
+}
+.solution-summary{
+  font-size: 2em;
+  font-weight: bolder;
+  border-radius: 3px;
+  display: flex;
+  align-self: center;
+}
+a.poster-name{
+  position: absolute;
+  bottom: 0px;
+  right: 5px;
+  color: rgb(104, 104, 104);
+  size: 0.8em;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/*-----------------------  Comments  -------------------*/
 .comments-container[open] summary::after{
   content: attr(data-open);
 }
@@ -84,17 +117,46 @@ div .profile_right{
 }
 details.comments-container{
   width: 100%;
+  margin-bottom: 10px;
+}
+details.solution-comments.comments-container{
+  width: calc(100% - 15px);
 }
 details{
   width: fit-content;
   height: auto;
   margin: 3px;
 }
-
 .comments{
   margin: 5px;
   padding: 5px;
   background: rgb(240, 240, 240);
+  position: relative;
+}
+.comment-bottom{
+  position: relative;
+}
+a.comment-name{
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  color: rgb(104, 104, 104);
+  size: 0.8em;
+  font-weight: bold;
+  right: 0px;
+  text-decoration: none;
+}
+.comment-votes-container{
+  position: absolute;
+  top: 0px;
+  left: 60px;
+}
+.comment-vote{
+  border: none;
+  background: rgba(0, 0, 0, 0);
+  size: 0.5em;
+  display: inline;
+  cursor: pointer;
 }
 details > summary{
   padding: 2px 6px;
@@ -107,7 +169,6 @@ details > summary{
 }
 details > summary.comment-summary{
   font-size: 0.8em;
-
 }
 .indented-comment{
   border-left: solid 2px black;

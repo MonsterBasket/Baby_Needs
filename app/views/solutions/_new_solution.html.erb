@@ -1,0 +1,10 @@
+<%= form_with scope: :solution, class: "new-solution", url: new_solution_path do |f| %>
+  <details>
+    <summary class="solution-summary">New Solution</summary> 
+    <div>
+        <%= f.text_area :description %><br>
+        <%= f.hidden_field :problem_id, value: @problem.id %>
+        <%= f.submit "Post" %>
+    </div>
+  </details>
+<% end %>

@@ -10,8 +10,12 @@
 <div class="profile_right"><%= @user.country %></div>
 <div class="profile_left">Email:</div>
 <div class="profile_right"><%= @user.email %></div>
+<div class="profile_left">Reputation:</div>
+<div class="profile_right"><%= @user.reputation %></div>
+
 
 </div>
-
-<%= link_to "Edit Profile", edit_user_path(@user) %>
+<% if @user.id == current_user.id %>
+  <%= link_to "Edit Profile", edit_user_path(@user) %>
+<% end %>
 

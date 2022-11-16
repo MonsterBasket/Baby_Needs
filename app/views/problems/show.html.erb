@@ -8,24 +8,36 @@
         <%= render partial: 'shared/like', locals: { parent: @problem, page: @problem, category: "like" } %>
       <% end %>
     </div>
-    <div class=<%= "red" if !!current_user && @problem.liked?(current_user) || @problem.disliked?(current_user) %>>
+    <div class=<%= "red" if logged_in? && (@problem.liked?(current_user) || @problem.disliked?(current_user)) %>>
       <%= @problem.rating %>
     </div>
     <div>
       <% if logged_in? %>
         <%= render partial: 'shared/like', locals: { parent: @problem, page: @problem, category: "dislike" } %>
-      <% end %> <%# I don't know why, but the page doesn't work with this end in place, even though it should definitely be there %>
+      <% end %>
     </div>
   </aside>
   <article>
-    <%= @problem.description %>
+    <span><%= @problem.description %></span>
+    <%= link_to @problem.user.display_name, @problem.user, class: "poster-name" %>
   </article>
 </div>
-  <%= render partial: 'shared/new_comment', locals: { parent: @problem, page: @problem, text: "Comment" } %>
 
 <details class="comments-container">
-  <summary data-open="Hide Comments" data-close="Show Comments"></summary>
+  <summary data-open="Hide Comments" data-close="Show <%= @problem.comments.count %> Comments"></summary>
+  <%= form_with scope: :comment, class: "new-comment", url: new_comment_path do |f| %>
+      <div>
+          <%= f.text_area :content %><br>
+          <%= f.hidden_field :parent_id, value: @problem.id %>
+          <%= f.hidden_field :parent_type, value: @problem.class %>
+          <%= f.hidden_field :page_id, value: @problem.id %>
+          <%= f.hidden_field :page_type, value: @problem.class %>
+          <%= f.submit "Comment", :disabled => !logged_in? %>
+      </div>
+  <% end %>
   <%= render partial: 'shared/show_comments', locals: { parent: @problem, page: @problem } %>
 </details>
 
-<%= button_to %>
+<%= render partial: 'solutions/show_solutions' %>
+<br>
+<%= render partial: 'solutions/new_solution' %>

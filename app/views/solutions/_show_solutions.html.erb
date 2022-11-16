@@ -1,0 +1,40 @@
+<h3>Solutions</h3>
+<% @problem.solutions.all.each do |solution| %>
+  <div class="solution-container">
+    <aside class="votes">
+      <div>
+        <% if logged_in? %>
+          <%= render partial: 'shared/like', locals: { parent: solution, page: @problem, category: "like" } %>
+        <% end %>
+      </div>
+      <div class=<%= "red" if !!current_user && solution.liked?(current_user) || solution.disliked?(current_user) %>>
+        <%= solution.rating %>
+      </div>
+      <div>
+        <% if logged_in? %>
+          <%= render partial: 'shared/like', locals: { parent: solution, page: @problem, category: "dislike" } %>
+        <% end %>
+      </div>
+    </aside>
+    <article>
+      <span><%= solution.description %></span>
+      <%= link_to solution.user.display_name, solution.user, class: "poster-name" %>
+    </article>
+  </div>
+
+  <details class="solution-comments comments-container">
+    <summary data-open="Hide Comments" data-close="Show <%= solution.comments.count %> Comments"></summary>
+    <%= form_with scope: :comment, class: "new-comment", url: new_comment_path do |f| %>
+      <div>
+        <%= f.text_area :content %><br>
+        <%= f.hidden_field :parent_id, value: solution.id %>
+        <%= f.hidden_field :parent_type, value: solution.class %>
+        <%= f.hidden_field :page_id, value: @problem.id %>
+        <%= f.hidden_field :page_type, value: @problem.class %>
+        <%= f.submit "Comment", :disabled => !logged_in? %>
+      </div>
+    <% end %>
+    <%= render partial: 'shared/show_comments', locals: { parent: solution, page: @problem } %>
+  </details>
+
+<% end %>

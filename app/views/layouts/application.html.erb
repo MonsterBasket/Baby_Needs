@@ -11,15 +11,21 @@
   </head>
 
   <body>
-      <%= link_to "Problems", problems_path %> - 
-      <%= link_to "Lost Items", lost_items_path %>
-      <% if !!current_user %>
-        <%= button_to "Logout", "/logout", method: :post %>
-      <% else %>
-        <%= link_to "Login", "/login" %>
-      <% end %>
-      <br>
-
+    <nav>
+      <div>
+        <%= link_to "<button>Home</button>".html_safe, "/", class: "navlink" %> - 
+        <%= link_to "<button>Problems</button>".html_safe, problems_path, class: "navlink" %> - 
+        <button>Lost Items</button>
+      </div>
+      <div>
+        <% if !!current_user %>
+          <%= link_to "<button>Profile</button>".html_safe, "/users/#{current_user.id}", class: "navlink" %> - 
+          <%= button_to "Logout", "/logout", class: "navlink", method: :post %>
+        <% else %>
+          <%= link_to "<button>Login</button>".html_safe, "/login", class: "navlink" %>
+        <% end %>
+      </div>
+    </nav>
     <%= yield %>
   </body>
 </html>

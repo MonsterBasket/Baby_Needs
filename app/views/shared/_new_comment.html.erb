@@ -7,7 +7,7 @@
         <%= f.hidden_field :parent_type, value: parent.class %>
         <%= f.hidden_field :page_id, value: page.id %>
         <%= f.hidden_field :page_type, value: page.class %>
-        <%= f.submit "Save" %>
+        <%= f.submit "Save", :disabled => !logged_in? %>
     </div>
   </details>
 <% end %>

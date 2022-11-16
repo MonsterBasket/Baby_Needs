@@ -8,4 +8,13 @@ class Solution < ApplicationRecord
 
   attribute :rating, :integer, default: 0
 
+  def liked?(user)
+    !!self.likes.find{ |like| like.user_id == user.id && like.category == "like" }
+  end
+
+  def disliked?(user)
+    !!self.likes.find{ |like| like.user_id == user.id && like.category == "dislike" }
+  end
+
+
 end

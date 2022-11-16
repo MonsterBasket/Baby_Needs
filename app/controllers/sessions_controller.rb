@@ -1,18 +1,21 @@
 class SessionsController < ApplicationController
   def create
-    binding.pry
     @user = User.find_by(username: params[:username])
-    if @user && @user.authenticate(params[:password])
-      login!
-      render json: {
-        logged_in: true,
-        user: @user
-      }
-    else
-      render json: { 
-        status: 401,
-        errors: ['no such user, please try again']
-      }
+    respond_to do |format|
+      if @user && @user.authenticate(params[:password])
+        login!
+        # render json: {
+        #   logged_in: true,
+        #   user: @user
+        # }
+        format.html { redirect_to "/" }
+      else
+        # render json: { 
+        #   status: 401,
+        #   errors: ['no such user, please try again']
+        # }
+        format.html { redirect_to "/login", status: :bad_request}
+      end
     end
   end
 
@@ -31,12 +34,14 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    binding.pry
-    logout!
-    render json: {
-      status: 200,
-      logged_out: true
-    }
+    respond_to do |format|
+      logout!
+      # render json: {
+      #   status: 200,
+      #   logged_out: true
+      # }
+      format.html { redirect_to "/" }
+    end
   end
   
   private
