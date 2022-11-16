@@ -18,5 +18,10 @@ module BabyNeeds
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
+
+    # don't think this is needed as it's not setup as API only anyway.
+    # config.api_only = false
   end
 end

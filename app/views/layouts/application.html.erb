@@ -11,6 +11,15 @@
   </head>
 
   <body>
+      <%= link_to "Problems", problems_path %> - 
+      <%= link_to "Lost Items", lost_items_path %>
+      <% if !!current_user %>
+        <%= button_to "Logout", "/logout", method: :post %>
+      <% else %>
+        <%= link_to "Login", "/login" %>
+      <% end %>
+      <br>
+
     <%= yield %>
   </body>
 </html>

@@ -4,7 +4,7 @@
 
 <div class="profile_container">
   <div class="profile_left">User Name:</div>
-  <div class="profile_right"><%= @user.user_name %></div>
+  <div class="profile_right"><%= @user.username %></div>
 
   <div class="profile_left"><%= f.label :display_name %>:</div>
   <div class="profile_right"><%= f.text_field :display_name %></div>
@@ -19,7 +19,7 @@
   <div class="profile_right"><%= f.password_field :password %></div>
 
   <div class="profile_left"><%= f.label :confirm_password %>:</div>
-  <div class="profile_right"><%= f.password_field :confirm_password %></div>
+  <div class="profile_right"><%= f.password_field :password_confirmation %></div>
 
 </div>
 <%= f.submit "Save" %>

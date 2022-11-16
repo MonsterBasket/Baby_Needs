@@ -3,8 +3,8 @@
 <%= form_with model: @user do |f| %>
 
   <div>
-    <%= f.label :user_name %>
-    <%= f.text_field :user_name %>
+    <%= f.label :username %>
+    <%= f.text_field :username %>
   </div>
   <div>
     <%= f.label :display_name %>
@@ -23,8 +23,8 @@
     <%= f.password_field :password %>
   </div>
   <div>
-    <%= f.label :confirm_password %>
-    <%= f.password_field :confirm_password %>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
   </div>
 
   <%= f.submit "Create Account" %>

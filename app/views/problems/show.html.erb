@@ -4,22 +4,16 @@
 <div class="problem-container">
   <aside class="votes">
     <div>
-      <%# if user_signed_in? %>
-        <% if @problem.liked?({ fake: "user", id: 2 }) %>
-          <%= button_to "▲", problem_like_path(@problem), method: "put", class:"red" %>
-        <% else %>
-          <%= button_to "▲", problem_like_path(@problem), method: "put" %>
-        <% end %>
-      <%# end %>
+      <% if logged_in? %>
+          <%#= button_to "▲", problem_like_path(@problem), method: "put", class:"#{"red" if @problem.liked?({ fake: "user", id: 2 })}" %>
+        <%= render partial: 'likes/like', locals: { parent: @problem, page: @problem, category: "like" } %>
+      <% end %>
     </div>
-    <div><%= @problem.rating %></div>
+    <div class=<%= "red" if !!current_user && @problem.liked?(current_user) || @problem.disliked?(current_user) %>><%= @problem.rating %></div>
     <div>
-      <%# if user_signed_in? %>
-        <% if @problem.disliked?({ fake: "user", id: 2 }) %>
-          <%= button_to "▼", problem_dislike_path(@problem), method: "put", class:"red" %>
-        <% else %>
-          <%= button_to "▼", problem_dislike_path(@problem), method: "put" %>
-        <% end %>
+      <% if logged_in? %>
+        <%#= button_to "▼", problem_dislike_path(@problem), method: "put", class:"#{"red" if @problem.disliked?(current_user)}" %>
+        <%= render partial: 'likes/like', locals: { parent: @problem, page: @problem, category: "dislike" } %>
       <%# end %>
     </div>
   </aside>
@@ -45,22 +39,24 @@
       <%= comment.user.display_name %><br>
       <%= comment.content %><br>
       
-      <%# if user_signed_in? %>
-        <% if comment.liked?({ fake: "user", id: 2 }) %>
-          <%= button_to "▲", comment_like_path(comment), method: "put", class:"red" %>
+      <% if logged_in? %>
+        <% if comment.liked?(current_user) %>
+          <%#= button_to "▲", comment_like_path(comment), method: "put", class:"red" %>
+          <%= render partial: 'likes/like', locals: { parent: comment, page: @problem, category: "like" } %>
         <% else %>
-          <%= button_to "▲", comment_like_path(comment), method: "put" %>
+          <%#= button_to "▲", comment_like_path(comment), method: "put" %>
+          <%= render partial: 'likes/like', locals: { parent: comment, page: @problem, category: "dislike" } %>
         <% end %>
-      <%# end %>
+      <% end %>
     <%= comment.rating %>
-      <%# if user_signed_in? %>
-        <% if comment.disliked?({ fake: "user", id: 2 }) %>
+      <% if logged_in? %>
+        <% if comment.disliked?(current_user) %>
           <%= button_to "▼", comment_dislike_path(comment), method: "put", class:"red" %>
         <% else %>
           <%= button_to "▼", comment_dislike_path(comment), method: "put" %>
         <% end %>
-      <%# end %>
-
+      <% end %>
     </p>
   <% end %>
 </section>
+<% end %>

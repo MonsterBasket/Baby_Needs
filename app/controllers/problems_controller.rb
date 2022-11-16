@@ -11,7 +11,7 @@ class ProblemsController < ApplicationController
 
   def like(category = "like")
     this_problem = Problem.all.find(params[:id])
-    this_like = Like.all.find{ |like| like.user_id == 2 && like.liked == this_problem }
+    this_like = Like.all.find{ |like| like.user_id == current_user.id && like.liked == this_problem }
     create_like = !this_like || this_like.category != category ? true : false
     this_like.destroy if this_like
     if create_like
@@ -28,7 +28,7 @@ class ProblemsController < ApplicationController
     @problem = Problem.new
     @problem.title = problem_params[:title]
     @problem.description = problem_params[:description]
-    @problem.user_id = 1
+    @problem.user_id = current_user.id
     @problem.rating = 0;
 
     respond_to do |format|
@@ -40,7 +40,9 @@ class ProblemsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @problem
+  end
 
   private
   

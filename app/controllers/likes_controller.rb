@@ -1,28 +1,37 @@
 class LikesController < ApplicationController
 
-  def create
-    
-
+  def create_or_delete
+    item = Kernel.const_get(like_params[:page_type]).all.find(like_params[:page_id])
+    this_like = Like.find{ |like| like.user_id == like_params[:user_id].to_i && like.liked == item }
+    create_like = !this_like || this_like.category != like_params[:category] ? true : false
+    this_like.destroy if this_like
+    if create_like
+      create
+    else
+      redirect_to "/#{like_params[:page_type].downcase}s/#{like_params[:page_id]}"
+    end
   end
 
-
   def create
-    @comment = Comment.new
-    @comment.user_id = 1
-    binding.pry
-    @comment.commented_on_id = comment_params[:parent_id]
-    @comment.commented_on_type = comment_params[:parent_type]
-    @comment.content = comment_params[:content]
+    @like = Like.new
+    @like.user_id = like_params[:user_id]
+    @like.liked_id = like_params[:parent_id]
+    @like.liked_type = like_params[:parent_type]
+    @like.category = like_params[:category]
 
     respond_to do |format|
-      if @comment.save
-        format.html
+      if @like.save
+        format.html { redirect_to "/#{like_params[:page_type].downcase}s/#{like_params[:page_id]}" }
       else
-        format.html { render :new, status: :bad_request }
+        format.html { redirect_to "/#{like_params[:page_type].downcase}s/#{like_params[:page_id]}", status: :bad_request }
       end
     end
   end
 
+  private
+  def like_params
+    params.fetch(:like, {})
+  end
 
 
 end
