@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe LostItem, type: :model do
-  let(:user) { User.create(user_name: "New User", display_name: "Freddy Mercury", country: "England", email: "yep", password: "nope") }
+  let(:user) { User.create(username: "New User", display_name: "Freddy Mercury", country: "England", email: "yep", password: "nope") }
   let(:lost_item) { LostItem.create(user: user, name: "item that you lost", description: "(optional) Description of the lost item") }
 
   it "is invalid without a user" do

@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Like, type: :model do
-  let(:user) { User.create(user_name: "New User", display_name: "Freddy Mercury", country: "England", email: "yep", password: "nope") }
-  let(:user2) { User.create(user_name: "Other guy", display_name: "Not Freddy Mercury", country: "England", email: "yep2", password: "nope") }
+  let(:user) { User.create(username: "New User", display_name: "Freddy Mercury", country: "England", email: "yep", password: "nope") }
+  let(:user2) { User.create(username: "Other guy", display_name: "Not Freddy Mercury", country: "England", email: "yep2", password: "nope") }
   let(:problem) { Problem.create(user: user2, title: "This is a problem", description: "Description of the problem") }
   let(:solution) { Solution.create( user: user2, problem: problem, description: "Description of the solution") }
   let(:lost_item) { LostItem.create( user: user2, name: "Item you've lost", description: "description of item if necessary") }

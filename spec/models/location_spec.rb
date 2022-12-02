@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Location, type: :model do
-  let(:user) { User.create(user_name: "New User", display_name: "Freddy Mercury", country: "England", email: "yep", password: "nope") }
+  let(:user) { User.create(username: "New User", display_name: "Freddy Mercury", country: "England", email: "yep", password: "nope") }
   let(:lost_item) { LostItem.create(user: user, name: "item that you lost", description: "(optional) Description of the lost item") }
   let(:location) { Location.create(user: user, lost_item: lost_item, name: "behind the fridge", description: "(Optional) More details on where to look behind the fridge")
   }

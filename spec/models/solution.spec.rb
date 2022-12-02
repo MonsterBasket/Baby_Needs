@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Solution, type: :model do
-  let(:user) { User.create(user_name: "New User", display_name: "Freddy Mercury", country: "England", email: "yep", password: "nope") }
+  let(:user) { User.create(username: "New User", display_name: "Freddy Mercury", country: "England", email: "yep", password: "nope") }
   let(:problem) { Problem.create(user: user, title: "This is a problem", description: "Description of the problem") }
   let(:solution) { Solution.create(user: user, problem: problem, description: "Description of the solution")
   }
